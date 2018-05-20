@@ -57,6 +57,10 @@ nav {
 }
 nav h1 {
   margin: auto;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 nav h1 a {
   color: #fff;
