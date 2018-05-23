@@ -310,8 +310,10 @@ nav h1 a {
 
 /*** ==================== TABLET ==================== ***/
 
-@media (min-width: 768px) and (max-width: 991px) {
-	#breadcrumb, #restaurant-container, #reviews-container {
+@media (max-width: 992px) {
+	#breadcrumb,
+	#restaurant-container,
+	#reviews-container {
 		width: 100%;
 	}
 
@@ -337,5 +339,61 @@ nav h1 a {
 
 	.inside #footer {
 		position: static;
+	}
+}
+
+/*** ==================== MOBILE ==================== ***/
+
+@media (min-width: 320px) and (max-width: 768px){
+	#restaurant-container, #reviews-container {
+		padding: 140px 25px 30px;
+	}
+
+	nav {
+		height: 100px;
+	}
+
+	nav h1 a {
+		font-size: 25px;
+	}
+
+	#breadcrumb li,
+	#restaurant-cuisine,
+	#restaurant-address {
+		font-size: 17px;
+	}
+
+	.inside #map-container {
+		top: 150px
+	}
+
+	#restaurants-list li {
+		width: 90%;
+	}
+
+	.filter-options {
+		height: auto;
+		flex-wrap: wrap;
+	}
+
+	.filter-options h2 {
+		width: 100%;
+		margin: 10px;
+		text-align: center;
+	}
+
+	#restaurant-name {
+		margin-top: 30px;
+	}
+	td, th, p {
+		font-size: 15px;
+	}
+
+	#rating {
+		width: 105px;
+	}
+
+	#footer {
+		font-size: 11px;
 	}
 }
