@@ -254,7 +254,7 @@ nav h1 a {
 #reviews-container {
   padding: 30px 40px 80px;
 }
-#reviews-container h2 {
+#reviews-container h3 {
   color: #f58500;
   font-size: 24pt;
   font-weight: 300;
@@ -345,7 +345,7 @@ nav h1 a {
 /*** ==================== MOBILE ==================== ***/
 
 @media (min-width: 320px) and (max-width: 768px){
-	#restaurant-container, #reviews-container {
+	#restaurant-container {
 		padding: 140px 25px 30px;
 	}
 
@@ -385,6 +385,7 @@ nav h1 a {
 	#restaurant-name {
 		margin-top: 30px;
 	}
+
 	td, th, p {
 		font-size: 15px;
 	}
