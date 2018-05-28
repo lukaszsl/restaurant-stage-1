@@ -57,7 +57,27 @@ self.addEventListener('fetch', function(e) {
 				return response;
 			}
 
-			return fetch(e.request);
+			var requestClone = e.request.clone();
+
+			fetch(requestClone)
+				.then(function(response) {
+					if(!response) {
+						console.log("[ServiceWorker] No response from Fetch");
+
+						return response;
+					}
+
+					var responseClone =response.clone();
+
+					caches.open(cacheName).then(function(cache) {
+						cache.put(e.request, responseClone);
+
+						return response;
+					});
+				})
+				.catch(function(err) {
+					console.log('[ServiceWorker] Error fetching and caching');
+				})
 		})
 	)
 });
