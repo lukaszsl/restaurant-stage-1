@@ -180,7 +180,7 @@ addMarkersToMap = (restaurants = self.restaurants) => {
 }
 
 /**
-* service worker
+* register service worker
 **/
 
 if ('serviceWorker' in navigator) {

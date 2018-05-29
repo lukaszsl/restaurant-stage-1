@@ -1,6 +1,5 @@
 var cacheName = 'v2';
 var cacheFiles = [
-	'/',
 	'css/styles.css',
 	'data/restaurants.json',
 	'img/1.jpg',
@@ -52,7 +51,7 @@ self.addEventListener('fetch', function(e) {
 
 	e.respondWith(
 		caches.match(e.request).then(function(response) {
-			if (response) {
+			if (response) {
 				console.log('[ServiceWorker] Found in cache', e.request.url);
 				return response;
 			}
