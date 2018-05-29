@@ -1,5 +1,6 @@
-var cacheName = 'v2';
+var cacheName = 'v3';
 var cacheFiles = [
+	'/',
 	'css/styles.css',
 	'data/restaurants.json',
 	'img/1.jpg',
@@ -19,13 +20,11 @@ var cacheFiles = [
 
 
 self.addEventListener('install', function(e) {
-	console.log('[ServiceWorker] Installed')
+	console.log('[ServiceWorker] Installed');
 
 	e.waitUntil(
-
 		caches.open(cacheName).then(function(cache) {
-
-			console.log('[service worker] caching cacheFiles');
+			console.log('[ServiceWorker] caching cacheFiles');
 			return cache.addAll(cacheFiles);
 		})
 	);
@@ -35,13 +34,13 @@ self.addEventListener('activate', function(e) {
 	console.log('[ServiceWorker] Activated');
 
 	e.waitUntil(
-		caches.keys().then(function(cacheNames) {
-			return Promise.all(cacheNames.map(function(thisCacheName) {
-				if (thisCacheName !== cacheName) {
-					console.log('[ServiceWorker] Removing cached files from', thisCacheName);
-					return caches.delete(thisCacheName);
+		caches.keys().then(function(keyList) {
+			return Promise.all(keyList.map(function(key) {
+				if (key !== cacheName && key !== dataCacheName) {
+					console.log('[ServiceWorker] Removing cached files from', key);
+					return caches.delete(key);
 				}
-			}))
+			}));
 		})
 	);
 });
@@ -51,32 +50,7 @@ self.addEventListener('fetch', function(e) {
 
 	e.respondWith(
 		caches.match(e.request).then(function(response) {
-			if (response) {
-				console.log('[ServiceWorker] Found in cache', e.request.url);
-				return response;
-			}
-
-			var requestClone = e.request.clone();
-
-			fetch(requestClone)
-				.then(function(response) {
-					if(!response) {
-						console.log("[ServiceWorker] No response from Fetch");
-
-						return response;
-					}
-
-					var responseClone =response.clone();
-
-					caches.open(cacheName).then(function(cache) {
-						cache.put(e.request, responseClone);
-
-						return response;
-					});
-				})
-				.catch(function(err) {
-					console.log('[ServiceWorker] Error fetching and caching');
-				})
+			return response || fetch(e.request);
 		})
 	)
 });
