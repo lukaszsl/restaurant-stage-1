@@ -1,8 +1,14 @@
-var cacheName = 'v4';
+var cacheName = 'restaurant-v5';
+var dataCacheName = 'restaurantData-v5';
 var cacheFiles = [
 	'/',
+	'index.html',
+	'restaurant.html',
 	'css/styles.css',
 	'data/restaurants.json',
+	'js/dbhelper.js',
+	'js/main.js',
+	'js/restaurant_info.js',
 	'img/1.jpg',
 	'img/2.jpg',
 	'img/3.jpg',
@@ -12,10 +18,7 @@ var cacheFiles = [
 	'img/7.jpg',
 	'img/8.jpg',
 	'img/9.jpg',
-	'img/10.jpg',
-	'js/dbhelper.js',
-	'js/main.js',
-	'js/restaurant_info.js'
+	'img/10.jpg'
 ];
 
 
@@ -45,12 +48,15 @@ self.addEventListener('activate', function(e) {
 	);
 });
 
-self.addEventListener('fetch', function(e) {
-	console.log('[ServiceWorker] Fetching', e.request.url);
-
-	e.respondWith(
-		caches.match(e.request).then(function(response) {
-			return response || fetch(e.request);
-		})
-	)
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.open(cacheName).then(function(cache) {
+      return cache.match(event.request).then(function (response) {
+        return response || fetch(event.request).then(function(response) {
+          cache.put(event.request, response.clone());
+          return response;
+        });
+      });
+    })
+  );
 });
