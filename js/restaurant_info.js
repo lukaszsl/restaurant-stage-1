@@ -1,6 +1,7 @@
 let restaurant;
 var map;
 
+
 /**
  * Initialize Google map, called from HTML.
  */
@@ -50,11 +51,12 @@ fetchRestaurantFromURL = (callback) => {
  */
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
+	name.setAttribute('tabindex', '0');
   name.innerHTML = restaurant.name;
 	name.tabIndex = 0;
 
   const address = document.getElementById('restaurant-address');
-  address.innerHTML = restaurant.address;
+  address.innerHTML = `<span id="address">${restaurant.address}</span>`;
 
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
@@ -62,7 +64,10 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 	image.alt = restaurant.photo_description;
 
   const cuisine = document.getElementById('restaurant-cuisine');
+	cuisine.setAttribute('tabindex', '0');
+	cuisine.setAttribute('aria-label', 'Restaurant cuisine '+restaurant.cuisine_type);
   cuisine.innerHTML = restaurant.cuisine_type;
+
 
   // fill operating hours
   if (restaurant.operating_hours) {
