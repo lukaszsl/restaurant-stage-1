@@ -138,15 +138,15 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  */
 createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
-	li.tabIndex = 0;
+  li.tabIndex = 0;
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-	image.alt = restaurant.photo_description;
+  image.alt = restaurant.photo_description;
   li.append(image);
 
-  const name = document.createElement('h1');
+  const name = document.createElement('h2');
   name.innerHTML = restaurant.name;
   li.append(name);
 
@@ -160,7 +160,7 @@ createRestaurantHTML = (restaurant) => {
 
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
-	more.setAttribute('aria-label', 'View Details for ' + restaurant.name);
+  more.setAttribute('aria-label', 'View Details for ' + restaurant.name);
   more.href = DBHelper.urlForRestaurant(restaurant);
   li.append(more);
 
@@ -186,13 +186,13 @@ addMarkersToMap = (restaurants = self.restaurants) => {
 **/
 
 if ('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('/sw.js')
-		.then(function(registration) {
-			console.log('Service worker registered!', registration);
-		})
-		.catch(function(err) {
-			console.log('Service worker faild!!!', err);
-		});
+  navigator.serviceWorker.register('/sw.js')
+    .then(function(registration) {
+      console.log('Service worker registered!', registration);
+    })
+    .catch(function(err) {
+      console.log('Service worker faild!!!', err);
+    });
 } else {
     console.log('No service-worker on this browser');
   }
