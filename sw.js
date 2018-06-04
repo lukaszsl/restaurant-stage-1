@@ -1,5 +1,5 @@
-var cacheName = 'restaurant-v6';
-var dataCacheName = 'restaurantData-v6';
+var cacheName = 'restaurant-v7';
+var dataCacheName = 'restaurantData-v7';
 var cacheFiles = [
 	'/',
 	'index.html',
